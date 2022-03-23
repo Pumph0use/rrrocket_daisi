@@ -2,6 +2,7 @@ import subprocess
 import json
 import tempfile
 import pandas as pd
+import os
 
 from rrrocket_retriever import get_latest_rrrocket_release
 from rrrocket_processor import process_match_overview, proccess_match_overview_raw
