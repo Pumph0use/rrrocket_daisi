@@ -21,7 +21,6 @@ def get_latest_rrrocket_release():
                 return 'Failed to retrieve file contents.'
 
             out_file_path = os.path.join(tempfile.gettempdir(), asset["name"])
-
             with open(out_file_path, 'wb') as out_file:
                 out_file.write(file_data.content)
 
@@ -29,7 +28,7 @@ def get_latest_rrrocket_release():
                 file_names = tarball.getnames()
                 output_file = file_names[-1]
                 output_dir = file_names[0]
-                tarball.extractall('.')
+                tarball.extractall(tempfile.gettempdir())
 
             os.remove(out_file_path)
 
@@ -37,7 +36,7 @@ def get_latest_rrrocket_release():
             if os.path.exists(out_path):
                 os.remove(out_path)
 
-            os.rename(output_file, out_path)
-            os.rmdir(output_dir)
+            os.rename(os.path.join(tempfile.gettempdir(), output_file), out_path)
+            os.rmdir(os.path.join(tempfile.gettempdir(), output_dir))
 
             return out_path
