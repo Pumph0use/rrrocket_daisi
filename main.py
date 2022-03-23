@@ -8,5 +8,5 @@ def process_replay(file_path: str):
 
     result = subprocess.check_output([bin_path, '-n', r'41805C0A4C99046708C38B9C735919D4.replay'])
 
-    return json.loads(result.decode('utf-8'))
+    return [{'type': 'text', 'data': result.decode('utf-8')}]
 
