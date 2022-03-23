@@ -12,7 +12,8 @@ def process_replay(file_path: str):
 
     blue, orange = process_match_overview(result['properties'])
 
-    return [blue, orange]
+    return [{'type': 'dataframe', 'label': 'Blue Team', 'data': blue},
+            {'type': 'dataframe', 'label': 'Orange Team', 'data': orange}]
 
 
 # if __name__ == '__main__':
