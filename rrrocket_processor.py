@@ -11,6 +11,15 @@ def process_match_overview(match_data: dict):
     return pd.DataFrame.from_dict(blue_team_stats), pd.DataFrame.from_dict(orange_team_stats)
 
 
+def proccess_match_overview_raw(match_data: dict):
+    team_size = match_data['TeamSize']
+
+    blue_team_stats = process_team_stats(0, team_size, match_data)
+    orange_team_stats = process_team_stats(1, team_size, match_data)
+
+    return blue_team_stats, orange_team_stats
+
+
 def process_team_stats(team_number: int, team_size: int, match_data: dict) -> dict:
     players = []
 
