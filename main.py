@@ -1,6 +1,6 @@
 import subprocess
 import json
-
+import tempfile
 import pandas as pd
 
 from rrrocket_retriever import get_latest_rrrocket_release
@@ -20,6 +20,11 @@ def process_replay_dataframe(file_path: pd.DataFrame):
 
 
 def process_replay_raw(file_path: pd.DataFrame):
+    if isinstance(file_path, bytes):
+        with open(os.path.join(tempfile.gettempdir(), 'replay.replay'), 'wb') as replay_file:
+            replay_file.write(file_path)
+            file_path = os.path.join(tempfile.gettempdir(), 'replay.replay')
+
     bin_path = get_latest_rrrocket_release()
 
     result = subprocess.check_output([bin_path, '-n', file_path])
